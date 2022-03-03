@@ -1,0 +1,2 @@
+
+We are in the process of rolling out Reflect technology. This will be the cornerstone of our next generation Python enterprise framework that will unleash the full potential of Python for business use. Although we do not need any funding at this stage, we do expect to expand rapidly and therefore will need to fund growth after this launch phase. Please feel free to reach out to us at [contact](mailto:contact@pytek.io) to know more about our strategy.

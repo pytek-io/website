@@ -1,0 +1,1 @@
+This section describes the main React libraries available in Reflect. These libraries are all open source except for AG-Grid which has a dual licence scheme. Exposing a library to Reflect is a pretty straightforward process. Should you like to use any other library please get in touch with [us](mailto:contact@pytek.io).
