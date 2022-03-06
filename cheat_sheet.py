@@ -77,7 +77,7 @@ def app():
                         else f"wget --no-check-certificate {url}",
                         f"tar xvf {archive}",
                         activate_environment,
-                        "pip install " + explicit_list() if is_win else f"packages/*-{reflect()}.tar.gz",
+                        "pip install " + (explicit_list() if is_win else f"packages/*-{reflect()}.tar.gz"),
                     ]
                 )
                 activated_environment = True
