@@ -195,7 +195,7 @@ def content(*args):
                 [
                     img(
                         dataSrc=path.join(
-                            *(app_path.split("#")[0].split(".")[:-1] + ["default.png"])
+                            path.split(app_path.split("#")[0])[0], "default.png"
                         ),
                         style={"width": "100%"},
                         className="swiper-lazy",

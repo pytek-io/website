@@ -3,11 +3,11 @@
 Reflect offers strong support for asynchronous tasks execution. It is particularly useful when your app needs to wait for the completion of any external tasks while still being responsive. The example below shows how to fetch data asynchronously using http requests.
 
 ```load_module
-tutorial.async_callback
+tutorial.snippets.async_callback
 ```
 
 ```read_module
-tutorial.async_callback
+tutorial.snippets.async_callback
 ```
 
 In this example we use [httpx](https://www.python-httpx.org/) which is an [asyncio](https://docs.python.org/3/library/asyncio.html) compatible http client. The key point to notice here is that `on_click` callback is async. You can also make pass async methods to `autorun` or even define `app` as async.
@@ -18,11 +18,11 @@ Reflect relies on [anyio](https://anyio.readthedocs.io) which runs on top of [as
 Being intrinsically asynchronous Reflect also allows you to design full blown asynchronous apps. The following example features realtime Bitcoin automatic updates.
 
 ```load_module
-tutorial.async_task
+tutorial.snippets.async_task
 ```
 
 ```read_module
-tutorial.async_task
+tutorial.snippets.async_task
 ```
 
 In this example, we use the auxiliary method `ws_connection_manager` which is a thin wrapper around an asyncio `Websocket` object making it slightly more user friendly.
