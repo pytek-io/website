@@ -150,7 +150,11 @@ def app():
             ),
             Row(create_col(Row(Col([steps]), justify="center"))),
             lambda: parse_md_doc(
-                f'You can also download the archives manually ({create_link()}, {create_link(".sig")}). Our public signature can be obtained by [mail](mailto:contact@pytek.io).'
+                f'''You can also download the archives manually using the following links.
+* {create_link()}
+* {create_link(".sig")}
+
+Our public signature can be obtained by [mail](mailto:contact@pytek.io).'''
             ),
         ]
     )

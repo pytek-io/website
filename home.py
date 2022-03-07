@@ -1,8 +1,9 @@
+import anyio
 from os import path
 from typing import Dict
 from itertools import chain
 
-from reflect import ResponsiveValue, get_window, WindowSize
+from reflect import ResponsiveValue, get_window, WindowSize, Callback, autorun
 from reflect_antd import Col, Row, Typography
 from reflect_html import a, div, img, svg, path as path_component
 from reflect_prism import PrismCodeFormatter
@@ -11,7 +12,7 @@ from reflect_utils.common import responsive_margins, load_module
 
 from .reflect.gallery import MENU as GALLERY_MENU
 from .reflect.libraries import MENU as LIBRARY_MENU
-from .common import LIGHT_BLUE, GREEN, BACKGROUND_COLOR
+from .common import LIGHT_BLUE, GREEN, BACKGROUND_COLOR, LOGO_HEIGHT, HOME_PAGE
 
 Title = Typography.Title
 
@@ -188,7 +189,15 @@ def centered(content):
     )
 
 
-def content(*args):
+def content(module_argument=None):
+    window = get_window()
+    if not hasattr(window, "current_scroll_values"):
+        window.current_scroll_values = None
+
+    def update_scroll_values(x):
+        window.updated = True
+        window.current_scroll_values = x
+
     demo_apps_carousel = Swiper(
         [
             SwiperSlide(
@@ -310,7 +319,7 @@ def content(*args):
         lineNumbers=DISPLAY_EDITOR_LINE_NUMBERS,
         style=CODE_EDITOR_STYLE,
     )
-    return div(
+    result = div(
         responsive_margins(
             [
                 responsive_margins(main_title, lg=1, xxl=2),
@@ -408,7 +417,31 @@ def content(*args):
                 ),
             ]
         ),
+        # style={
+        #     "marginBottom": "5%",
+        # },
         style={
-            "marginBottom": "5%",
+            "scrollBehavior": "smooth",
+            "overflow": "auto",
+            "maxHeight": f"calc(100vh - {LOGO_HEIGHT}px)",
+            # "marginBottom": "5%",
         },
+        onScroll=Callback(
+            update_scroll_values,
+            args=["target.scrollLeft", "target.scrollTop"],
+        ),
     )
+
+    # quick hack to around the fact that calls to scrollTo seem to be ignored if they happen too early
+    async def restore_state():
+        if window.hash() == HOME_PAGE and window.current_scroll_values:
+            window.updated = False
+            for i in range(10):
+                if not window.updated:
+                    await result.scrollTo(*window.current_scroll_values)
+                    await anyio.sleep(0.1)
+                else:
+                    break
+
+    autorun(restore_state)
+    return result

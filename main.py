@@ -1,11 +1,13 @@
 from importlib import import_module
 
-import anyio
+# FIXME: can't import those from .commmon, weird...
+LOGO_HEIGHT = 52
+HOME_PAGE = "website.home"
 from .common import BACKGROUND_COLOR, LIGHT_BLUE
 from reflect_antd import Layout, Menu
 from reflect_html import a, div, img, svg, path
 
-from reflect import CachedEvaluation, Callback, get_window, autorun
+from reflect import CachedEvaluation, Callback, get_window
 
 Header, Content, Footer, Sider = (
     Layout.Header,
@@ -15,6 +17,9 @@ Header, Content, Footer, Sider = (
 )
 
 TITLE = "pytek.io"
+
+BODY_STYLE = {"backgroundColor": BACKGROUND_COLOR}
+
 CSS = [
     "website/website.css",
     "website/ant_site_index.css",
@@ -23,6 +28,10 @@ CSS = [
     "static/antd.css",
 ]
 DESCRIPTION = "Turn your Python scripts into web apps!"
+BODY_STYLE = {
+    "backGroundColor": BACKGROUND_COLOR,
+    
+}
 # rmk: we change the original link to font-display: block to avoid flash of unstyled text
 HTML_LINKS = [
     dict(rel="preconnect", href="https://fonts.googleapis.com"),
@@ -38,8 +47,7 @@ HTML_LINKS = [
     },
 ]
 
-LOGO_HEIGHT = 52
-HOME_PAGE = "website.home"
+
 GREY = "#848689"
 
 MENU = "M904 160H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8zm0 624H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8zm0-312H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8z"
@@ -87,21 +95,9 @@ class ModuleArgument:
             return get_item_if_any(self.parsed_application_hash(), 1, "default")
 
 
-class Value:
-    def __init__(self, value):
-        self._value = value
-
-    def set(self, value):
-        self._value = value
-
-    def __call__(self):
-        return self._value
-
-
 def app():
     window = get_window()
     current_display, module_argument, cached_pages = None, ModuleArgument(), {}
-    current_scroll_values, updated = Value(None), False
 
     def create_content():
         nonlocal current_display, module_argument
@@ -136,12 +132,6 @@ def app():
             "paddingTop": int(LOGO_HEIGHT * 0.2),
         },
     )
-
-    def update_scroll_values(x):
-        nonlocal updated
-        if window.hash() == HOME_PAGE:
-            updated = True
-            current_scroll_values.set(x)
 
     async def on_menu_selected(value):
         window.hash.set(value)
@@ -198,29 +188,6 @@ def app():
             ],
             style={"backgroundColor": BACKGROUND_COLOR},
         ),
-        style={
-            "scrollBehavior": "smooth",
-            "overflow": "auto",
-            "maxHeight": "calc(100vh)",
-        },
-        onScroll=Callback(
-            update_scroll_values,
-            args=["target.scrollLeft", "target.scrollTop"],
-        ),
-        componentDidMount=lambda: current_scroll_values.set([0, 0]),
     )
 
-    # quick hack to around the fact that calls to scrollTo seem to be ignored if they happen too early
-    async def restore_scrolling_state():
-        if window.hash() == HOME_PAGE and current_scroll_values():
-            nonlocal updated
-            updated = False
-            for i in range(10):
-                if not updated:
-                    await result.scrollTo(*current_scroll_values())
-                    await anyio.sleep(0.1)
-                else:
-                    break
-
-    autorun(restore_scrolling_state)
-    return div(result)
+    return result

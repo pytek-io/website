@@ -4,7 +4,7 @@ import anyio
 from reflect.components import Callback
 from reflect.value import autorun, make_observable
 
-from reflect_antd import Layout, Menu, Col, Row, Affix, Button
+from reflect_antd import Layout, Menu, Affix, Button
 from reflect_ant_icons import MenuOutlined, CloseOutlined
 from reflect_html import article, section, a, div
 from reflect_utils.md_parsing import parse_md_doc
@@ -19,6 +19,7 @@ MAIN_COL_BREAK_POINTS = dict(
     xl=19,
     xxl=20,
 )
+
 
 WHITE = "#FFFFFF"
 GREEN = "#0da166"
@@ -35,6 +36,8 @@ DARK_BLUE = "#0C2D48"
 ALMOST_BLACK = "#0f1724"
 BACKGROUND_COLOR = ALMOST_BLACK
 
+LOGO_HEIGHT = 52
+HOME_PAGE = "website.home"
 
 def generate_surrounding_items(MENU):
     def generate_surrounding_items(item):
@@ -209,6 +212,7 @@ def create_menu_content(
 
     autorun(set_scroll_position)
 
+    # return main_section
     return Layout(
         [
             Layout.Sider(
@@ -218,7 +222,7 @@ def create_menu_content(
                 style={
                     "background": WHITE,
                     "overflow": "auto",
-                    "maxHeight": "calc(100vh)",  # FIXME: 112 is empirical...
+                    "maxHeight": "100vh",
                 },
                 collapsed=collapsed,
                 collapsedWidth=0,
