@@ -18,7 +18,6 @@ Header, Content, Footer, Sider = (
 
 TITLE = "pytek.io"
 
-BODY_STYLE = {"backgroundColor": BACKGROUND_COLOR}
 
 CSS = [
     "website/website.css",
@@ -30,8 +29,9 @@ CSS = [
 DESCRIPTION = "Turn your Python scripts into web apps!"
 BODY_STYLE = {
     "backGroundColor": BACKGROUND_COLOR,
-    
+    "overflow": "hidden",
 }
+
 # rmk: we change the original link to font-display: block to avoid flash of unstyled text
 HTML_LINKS = [
     dict(rel="preconnect", href="https://fonts.googleapis.com"),
