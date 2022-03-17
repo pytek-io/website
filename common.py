@@ -10,11 +10,9 @@ from reflect_html import article, section, a, div
 from reflect_utils.md_parsing import parse_md_doc
 from reflect_utils.feedback import make_editable
 
-MENU_COL_BREAK_POINTS = dict(xs=24, sm=24, md=6, lg=6, xl=5, xxl=4)
+MENU_COL_BREAK_POINTS = dict(xs=24, md=6, lg=6, xl=5, xxl=4)
 MAIN_COL_BREAK_POINTS = dict(
     xs=24,
-    # sm=24,
-    md=24,
     lg=20,
     xl=19,
     xxl=20,
@@ -38,6 +36,9 @@ BACKGROUND_COLOR = ALMOST_BLACK
 
 LOGO_HEIGHT = 52
 HOME_PAGE = "website.home"
+
+FONT_FAMILY = "Nanum Pen Script, cursive"
+FONT_FAMILY = "Permanent Marker, cursive"  
 
 def generate_surrounding_items(MENU):
     def generate_surrounding_items(item):

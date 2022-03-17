@@ -6,6 +6,7 @@ HOME_PAGE = "website.home"
 from .common import BACKGROUND_COLOR, LIGHT_BLUE
 from reflect_antd import Layout, Menu
 from reflect_html import a, div, img, svg, path
+from reflect_utils import HAMBURGER_MENU
 
 from reflect import CachedEvaluation, Callback, get_window
 
@@ -17,8 +18,6 @@ Header, Content, Footer, Sider = (
 )
 
 TITLE = "pytek.io"
-
-
 CSS = [
     "website/website.css",
     "website/ant_site_index.css",
@@ -26,9 +25,8 @@ CSS = [
     "demos/ant_site_logo.css",
     "static/antd.css",
 ]
-DESCRIPTION = "Turn your Python scripts into web apps!"
 BODY_STYLE = {
-    "backGroundColor": BACKGROUND_COLOR,
+    "backGroundColor": "rgb" + str(BACKGROUND_COLOR),
     "overflow": "hidden",
 }
 
@@ -50,7 +48,6 @@ HTML_LINKS = [
 
 GREY = "#848689"
 
-MENU = "M904 160H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8zm0 624H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8zm0-312H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8z"
 COPY = "M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"
 BOOK = "M832 64H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V96c0-17.7-14.3-32-32-32zm-260 72h96v209.9L621.5 312 572 347.4V136zm220 752H232V136h280v296.9c0 3.3 1 6.6 3 9.3a15.9 15.9 0 0022.3 3.7l83.8-59.9 81.4 59.4c2.7 2 6 3.1 9.4 3.1 8.8 0 16-7.2 16-16V136h64v752z"
 APP_STORE = "M464 144H160c-8.8 0-16 7.2-16 16v304c0 8.8 7.2 16 16 16h304c8.8 0 16-7.2 16-16V160c0-8.8-7.2-16-16-16zm-52 268H212V212h200v200zm452-268H560c-8.8 0-16 7.2-16 16v304c0 8.8 7.2 16 16 16h304c8.8 0 16-7.2 16-16V160c0-8.8-7.2-16-16-16zm-52 268H612V212h200v200zM464 544H160c-8.8 0-16 7.2-16 16v304c0 8.8 7.2 16 16 16h304c8.8 0 16-7.2 16-16V560c0-8.8-7.2-16-16-16zm-52 268H212V612h200v200zm452-268H560c-8.8 0-16 7.2-16 16v304c0 8.8 7.2 16 16 16h304c8.8 0 16-7.2 16-16V560c0-8.8-7.2-16-16-16zm-52 268H612V612h200v200z"
@@ -125,7 +122,7 @@ def app():
     ]
     main_menu_items = Menu.SubMenu(
         items,
-        title=create_icon(MENU, int(LOGO_HEIGHT * 0.6)),
+        title=create_icon(HAMBURGER_MENU, int(LOGO_HEIGHT * 0.6)),
         style={
             "color": GREY,
             "marginRight": "5vh",
@@ -181,10 +178,7 @@ def app():
                     id="header",
                     style={"backgroundColor": BACKGROUND_COLOR, "padding": 0},
                 ),
-                Content(create_content)
-                # Footer(
-                #     style={"backgroundColor": DARK_BLUE},
-                # ),
+                Content(create_content),
             ],
             style={"backgroundColor": BACKGROUND_COLOR},
         ),

@@ -12,7 +12,7 @@ from reflect_utils.common import responsive_margins, load_module
 
 from .reflect.gallery import MENU as GALLERY_MENU
 from .reflect.libraries import MENU as LIBRARY_MENU
-from .common import LIGHT_BLUE, GREEN, BACKGROUND_COLOR, LOGO_HEIGHT, HOME_PAGE
+from .common import LIGHT_BLUE, GREEN, BACKGROUND_COLOR, LOGO_HEIGHT, HOME_PAGE, FONT_FAMILY
 
 Title = Typography.Title
 
@@ -21,8 +21,7 @@ EDIT = "M257.7 752c2 0 4-.2 6-.5L431.9 722c2-.4 3.9-1.3 5.3-2.8l423.9-423.9a9.96
 MAIN_COL_BREAK_POINTS = dict(xs=24, sm=4)
 JS_PYTHON_RESULT_BREAK_POINTS = dict(xs=24, md=19, lg=16, xl=12)
 SIMPLE_FORMULA_BREAKPOINTS = dict(xs=24, sm=20, md=17, lg=16, xl=12)
-FONT_FAMILY = "Nanum Pen Script, cursive"
-FONT_FAMILY = "Permanent Marker, cursive"
+SLOGAN = "Turn your Python scripts into web apps"
 
 MAIN_TITLE_STYLE = dict(
     fontSize="32px",
@@ -221,7 +220,7 @@ def content(module_argument=None):
     )
     current_demo_name = lambda: GALLERY_MENU[demo_apps_carousel() or 0][0]
     main_title = Title(
-        "Turn your Python scripts into web apps",
+        SLOGAN,
         level=1,
         style=clone_and_update(
             TITLE_STYLE,
