@@ -374,7 +374,7 @@ def content(module_argument=None):
                 ),
                 title("Batteries included"),
                 text_column(
-                    "Reflect let you use the most popular React libraries out of the box. See a list of the most well known ones below."
+                    "Reflect lets you use the most popular React libraries out of the box. See a list of the most well known ones below."
                 ),
                 library_logos,
                 title("A framework for everyone"),
