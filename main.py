@@ -26,7 +26,7 @@ CSS = [
     "static/antd.css",
 ]
 BODY_STYLE = {
-    "backGroundColor": "rgb" + str(BACKGROUND_COLOR),
+    "backgroundColor": "rgb" + str(BACKGROUND_COLOR),
     "overflow": "hidden",
 }
 
