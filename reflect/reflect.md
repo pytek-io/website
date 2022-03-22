@@ -1,6 +1,6 @@
 ### A Python enterprise framework
 
-Reflect is a complete solution allowing to easily develop business apps (ie: [Single-page application](https://en.wikipedia.org/wiki/Single-page_application)) all in Python. It exposes many [React](https://reactjs.org/) component libraries to Python and provides a powerful high level API to drive these components. Apps are Python scripts which can be launched from a web browser.
+Reflect is a complete solution which allows you to easily develop business apps (ie: [Single-page application](https://en.wikipedia.org/wiki/Single-page_application)) all in Python. It exposes many [React](https://reactjs.org/) component libraries to Python and provides a powerful high level API to drive these components. Apps are Python scripts which can be launched from a web browser.
 
 ## General architecture
 
