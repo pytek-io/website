@@ -139,18 +139,16 @@ def app():
                 Header(
                     div(
                         [
-                            div(
-                                a(
-                                    img(
-                                        alt="pytek logo",
-                                        src="website/static/cogs_pytek.svg",
-                                        style={
-                                            "height": LOGO_HEIGHT,
-                                            "marginLeft": "2rem",
-                                        },
-                                    ),
-                                    href="#" + HOME_PAGE,
+                            a(
+                                img(
+                                    alt="pytek logo",
+                                    src="website/static/cogs_pytek.svg",
+                                    style={
+                                        "height": LOGO_HEIGHT,
+                                        "marginLeft": "2rem",
+                                    },
                                 ),
+                                href="#" + HOME_PAGE,
                             ),
                             div(
                                 Menu(

@@ -12,7 +12,14 @@ from reflect_utils.common import responsive_margins, load_module
 
 from .reflect.gallery import MENU as GALLERY_MENU
 from .reflect.libraries import MENU as LIBRARY_MENU
-from .common import LIGHT_BLUE, GREEN, BACKGROUND_COLOR, LOGO_HEIGHT, HOME_PAGE, FONT_FAMILY
+from .common import (
+    LIGHT_BLUE,
+    GREEN,
+    BACKGROUND_COLOR,
+    LOGO_HEIGHT,
+    HOME_PAGE,
+    FONT_FAMILY,
+)
 
 Title = Typography.Title
 
@@ -86,8 +93,8 @@ def batch(iterable, n=1):
         yield iterable[ndx : min(ndx + n, l)]
 
 
-def find_file_extension(file_path):
-    for extension in ["png", "svg", "jpg"]:
+def select_file_extension(file_path):
+    for extension in ["gif", "png", "svg", "jpg"]:
         maybe_path = f"{file_path}.{extension}"
         if path.exists(maybe_path):
             return maybe_path
@@ -100,7 +107,7 @@ LIBRARY_ICONS_AND_MODULES = [
             (
                 human_readable_name,
                 file_name,
-                find_file_extension(path.join("website", "logos", file_name[:-3]))
+                select_file_extension(path.join("website", "logos", file_name[:-3]))
                 or path.join("website", "logos", "github.png"),
             )
             for human_readable_name, file_name in libraries
@@ -202,8 +209,8 @@ def content(module_argument=None):
             SwiperSlide(
                 [
                     img(
-                        dataSrc=path.join(
-                            path.split(app_path.split("#")[0])[0], "default.png"
+                        dataSrc=select_file_extension(
+                            path.join(path.split(app_path.split("#")[0])[0], "default")
                         ),
                         style={"width": "100%"},
                         className="swiper-lazy",
