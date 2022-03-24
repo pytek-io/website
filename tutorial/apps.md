@@ -14,7 +14,7 @@ demos.hello_world
 
 ### Styling
 
-You can customize components style by passing a `style` argument. Note that you need to use [React camelCased](https://reactjs.org/docs/dom-elements.html) attribute names and not the original html attribute names.
+You can customize component look and feel by passing a `style` argument. Note that you need to use [React camelCased](https://reactjs.org/docs/dom-elements.html) attribute names and not the original html attribute names.
 
 ```read_module
 demos.hello_world_argument
@@ -44,7 +44,7 @@ This will produce the following.
 demos.hello_world_argument
 ```
 
-In practice we would recommend using CSS for common style properties and customize specific components directly in the code.
+We would recommend using CSS for common style properties and customize specific components directly in the code.
 
 ### Summary
 

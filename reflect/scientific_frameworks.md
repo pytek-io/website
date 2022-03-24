@@ -3,7 +3,7 @@ Thanks to its agnostic architecture, Reflect overlaps significantly with these f
 
 ## Plotly
 
-[Plotly](https://plotly.com/) is a world leader in data visualization solutions for scientific and business purposes. It allows you to build simple data visualization web apps with minimal coding effort. Thanks to its vast collection of precanned templates, which can be automatically converted to nice looking pdf reports.
+[Plotly](https://plotly.com/) is a world leader in data visualization solutions for scientific and business purposes. It allows you to build simple data visualization web apps with minimal coding effort. It comes with a vast collection of precanned templates, which can be automatically converted to nice looking pdf reports.
 
 #### Plotly strengths
 
@@ -14,7 +14,7 @@ Thanks to its agnostic architecture, Reflect overlaps significantly with these f
 
 - Exposes the most popular graph libraries including [Plotly JS](https://plotly.com/javascript/) and [Altair](https://altair-viz.github.io/#).
 - Strong support for realtime display thanks to its asynchronous design.
-- Allows the definition advanced behaviours in a callback free style.
+- Allows the definition of advanced behaviours in a callback free style.
 - No out-of-the box report generation.
 
 ## Streamlit
@@ -34,7 +34,7 @@ Thanks to its agnostic architecture, Reflect overlaps significantly with these f
 
 ## Jupyter
 
-[Jupyter](https://jupyter.org/) provides a rather unique way to share scientific results. It is very popular among the scientific community as well as in finance. It is unique in that it allows to execute code and display the results alongside extra content, making highly suitable for interactive scientific publications (aka Notebook). It is now being extended and commercially supported by a few companies such as [DeepNote](https://deepnote.com), [Hex](https://deepnote.com), [Colab](https://colab.research.google.com).
+[Jupyter](https://jupyter.org/) provides a rather unique way to share scientific results. It is very popular among the scientific community as well as in finance. It is unique in that it allows you to execute code and display the results alongside extra content, making highly suitable for interactive scientific publications (aka Notebook). It is now being extended and commercially supported by a few companies such as [DeepNote](https://deepnote.com), [Hex](https://deepnote.com), [Colab](https://colab.research.google.com) etc.
 
 #### Jupyter strengths
 
@@ -48,7 +48,7 @@ Thanks to its agnostic architecture, Reflect overlaps significantly with these f
 - Allows the building of very powerful and interactive data exploration tools at an industrial scale.
 
 ## Bokeh
-[Bokeh](https://bokeh.org) is a Python visualization library which provides functionalities which allow simple "Data applications", dashboards, streaming applications, etc. to be build.  
+[Bokeh](https://bokeh.org) is a Python visualization library which provides functionalities which allows simple "Data applications", dashboards, streaming applications, etc to be built.  
 
 #### Bokeh strengths
 
@@ -58,7 +58,7 @@ Thanks to its agnostic architecture, Reflect overlaps significantly with these f
 
 #### How Reflect compares
 
-- Allows the creation much more complex layouts/behaviours.
+- Allows the creation of much more complex layouts/behaviours.
 - Does not support large data set streaming.
 
 ## Panel

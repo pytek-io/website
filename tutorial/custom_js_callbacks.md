@@ -10,7 +10,7 @@ tutorial.snippets.js_method
 tutorial.snippets.js_method
 ```
 
-Notice how the input is nicely formatted in the UI input component, while the output displays the raw number. A `JSMethod` constructor takes a unique tag as first argument allowing us to identify any errors related to this function. The second argument is the JavaScript method body, the remaining ones are the JavaScript argument names.
+Notice how the input is nicely formatted in the UI input component, while the output displays the raw number. A `JSMethod` constructor takes a unique tag as the first argument, allowing us to identify any errors related to this function. The second argument is the JavaScript method body and the remaining ones are the JavaScript argument names.
 You may have noticed in that example that we displayed the raw number by calling `amount_input` from a lambda expression. We need to do that in order for the framework to display the actual `amount_input` value.
 
 ### Currying javascript callbacks
@@ -25,9 +25,9 @@ tutorial.snippets.js_method_curried
 tutorial.snippets.js_method_curried
 ```
 
-You can notice that the `filter_dates` callback takes two arguments. The first one (i.e. holidays) is passed when we partially apply the callback. The remaining one will then be passed on the client side. Another interesting point to notice is the fact that we convert `holidays` dates into timestamps. This is usually not necessary as Python data are automatically converted to their Javascript counterparts. In this example, however, we convert Python dates to timestamps as object JavaScript don't support operators (equality, etc).
+You can notice that the `filter_dates` callback takes two arguments. The first one (i.e. holidays) is passed when we partially apply the callback. The remaining one will then be passed on the client side. Another interesting point to note is the fact that we convert `holidays` dates into timestamps. This is usually not necessary as Python data are automatically converted to their Javascript counterparts. In this example, however, we convert Python dates to timestamps, as object JavaScript doesn't support operators (equality, etc).
 
-Taking this further you can define more complex behaviours. In the example below we show how to restrict the date range a user can choose.
+Additionally, you can also define more complex behaviours. In the example below we show how to restrict the date range a user can choose.
 
 ```load_module
 tutorial.snippets.js_method_curried_advanced

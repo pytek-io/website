@@ -10,7 +10,7 @@ Our framework foundations are now in place, but there is still a huge amount we 
 
 ### Content creator
 
-You like to communicate, we would really welcome your contribution to our documentation, blog, communication on various social networks, etc. Feel free to edit the pages. We very much see documentation as a key aspects of any piece of technology. you like writing tech content
+You like to communicate? We would really welcome your contribution to our documentation, blog, communication on various social networks, etc. Feel free to edit the pages. We very much see documentation as a key aspect of any piece of technology.
 
 ### Other than that
 

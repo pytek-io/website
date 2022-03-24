@@ -1,4 +1,4 @@
-You can find below the relevant commands to setup a Reflect environment. You can also use the links to download the relevant files and install Reflect manually. 
+Below, you will find the relevant commands to setup a Reflect environment. You can also use the links to download the relevant files and install Reflect manually. 
 
 ```load_module_no_frame
 website.cheat_sheet
@@ -10,15 +10,15 @@ We highly recommend creating a dedicated Python environment using [venv](https:/
 
 ### Install Python modules
 
-The `activate` command ensures that the local virtual environment is active so that Reflect packages will be installed `:mark:in the local virtual environment`. You can use `which python` on \*.nix|Mac and `where.exe python` on windows to double check which Python environment is active before installing Reflect packages. You can also check that Reflect packages are correctly installed afterward using `python -c "import reflect"` command.
+The `activate` command ensures that the local virtual environment is active so that Reflect packages will be installed `:mark:in the local virtual environment`. You can use `which python` on \*.nix|Mac and `where.exe python` on windows to double check which Python environment is active before installing Reflect packages. You can also check that Reflect packages are correctly installed afterwards by using `python -c "import reflect"` command.
 
 ### Launch Reflect server
 
-Reflect app server must also be launched from `:mark: the local virtual environment`. By default Reflect app server will serve app locally on port 8080. You will see the server dashboard under [localhost:8080](http://localhost:8080) as this is the default application. You can open apps by clicking the `Launch app` button or by typing their names in the address bar.
+Reflect app server must also be launched from `:mark: the local virtual environment`. By default, the Reflect app server will serve your apps on port 8080. You will see the server dashboard under [localhost:8080](http://localhost:8080) as this is the default application. You can open apps by clicking the `Launch app` button or by typing their names in the address bar.
 
 ![Reflect dash board](/website/reflect_dashboard.png)
 
 ### Open apps
-One can download demos and code snippets from this tutorial on [github](https://github.com/pytek-io). For the ones who prefer diving straight into the code first (then reading the explanations carefully ;-), you can see the code snippets using [http://localhost:8080/app/tutorial/app_explorer#tutorial/snippets](http://localhost:8080/app/tutorial/app_explorer#tutorial/snippets). 
+One can download demos and code snippets from this tutorial on [github](https://github.com/pytek-io). If you would prefer to dive straight into the code first (then reading the explanations carefully ;-), you can see the code snippets using [http://localhost:8080/app/tutorial/app_explorer#tutorial/snippets](http://localhost:8080/app/tutorial/app_explorer#tutorial/snippets). 
 
 ![App explorer](/website/app_explorer.png)

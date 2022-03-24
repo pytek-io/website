@@ -1,4 +1,4 @@
-Reflect supports application routing making the overall user experience similar to the traditional web experience in which users can navigate back and forth in their navigation journey. It also allows to create deep links which can be shared or bookmarked. These will allow them to launch a given app with specific startup parameters.
+Reflect supports application routing, making the overall user experience similar to the traditional web experience in which users can navigate back and forth in their navigation journey. It also allows the creation of deep links which can be shared or bookmarked. These will allow them to launch a given app with specific startup parameters.
 
 ### Using application hash value
 
@@ -14,7 +14,7 @@ Calling this app at `app/tutorial.snippets.argument_hash#John` will yield the fo
 tutorial.snippets.argument_hash#John
 ```
 
-Note hash is an observable value which can be updated from the app itself. This allows to make relevant parts of the app state known to the browser, closely replicating a more usual web user experience.
+Note hash is an observable value which can be updated from the app itself. This allows you to make relevant parts of the app state known to the browser, closely replicating a more usual web user experience.
 
 ```read_module
 tutorial.snippets.argument_hash_update#John
@@ -26,4 +26,4 @@ We can't display the result in this page directly as it would clash with the web
 
 - Parts of the app state can be exposed in the address bar, allowing users to create links that will launch apps with specific parameters
 - It also allows users to navigate backwards and forwards
-- App path can be accessed and updated through the Window path attribute
+- The app path can be accessed and updated through the Window path attribute
