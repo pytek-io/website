@@ -28,7 +28,7 @@ EDIT = "M257.7 752c2 0 4-.2 6-.5L431.9 722c2-.4 3.9-1.3 5.3-2.8l423.9-423.9a9.96
 MAIN_COL_BREAK_POINTS = dict(xs=24, sm=4)
 JS_PYTHON_RESULT_BREAK_POINTS = dict(xs=24, md=19, lg=16, xl=12)
 SIMPLE_FORMULA_BREAKPOINTS = dict(xs=24, sm=20, md=17, lg=16, xl=12)
-SLOGAN = "Turn your Python scripts into web apps"
+SLOGAN = "Build web apps at the speed of light."
 
 MAIN_TITLE_STYLE = dict(
     fontSize="32px",
