@@ -29,6 +29,12 @@ MAIN_COL_BREAK_POINTS = dict(xs=24, sm=4)
 JS_PYTHON_RESULT_BREAK_POINTS = dict(xs=24, md=19, lg=16, xl=12)
 SIMPLE_FORMULA_BREAKPOINTS = dict(xs=24, sm=20, md=17, lg=16, xl=12)
 SLOGAN = "Build web apps at the speed of light."
+# this is to hide scroll bar on Chrome
+HIDE_SCROLL_BAR_STYLE = """
+::-webkit-scrollbar {
+  width: 0px;
+}
+"""
 
 MAIN_TITLE_STYLE = dict(
     fontSize="32px",
@@ -79,8 +85,6 @@ CODE_EDITOR_STYLE = {
     "margin": 0,
     "padding": 0,
 }
-
-SCROLL_BAR_STYLE = open("demos/almost_dark_scrollbars.css", "r").read()
 
 def clone_and_update(base: Dict, **updates):
     result = base.copy()
@@ -329,7 +333,7 @@ def content(module_argument=None):
     result = div(
         responsive_margins(
             [
-                style(SCROLL_BAR_STYLE),
+                style(HIDE_SCROLL_BAR_STYLE),
                 responsive_margins(main_title, lg=1, xxl=2),
                 responsive_margins(demo_apps_carousel, xs=2, md=0),
                 a(
@@ -427,7 +431,8 @@ def content(module_argument=None):
         ),
         style={
             "scrollBehavior": "smooth",
-            "overflow": "auto",
+            "overflowY": "scroll",
+            "scrollbarWidth": "none",
             "maxHeight": f"calc(100vh - {LOGO_HEIGHT}px)",
             # "marginBottom": "5%",
         },
