@@ -5,7 +5,7 @@ from itertools import chain
 
 from reflect import ResponsiveValue, get_window, WindowSize, Callback, autorun
 from reflect_antd import Col, Row, Typography
-from reflect_html import a, div, img, svg, path as path_component
+from reflect_html import a, div, img, svg, style, path as path_component
 from reflect_prism import PrismCodeFormatter
 from reflect_swiper import Swiper, SwiperSlide
 from reflect_utils.common import responsive_margins, load_module
@@ -80,6 +80,7 @@ CODE_EDITOR_STYLE = {
     "padding": 0,
 }
 
+SCROLL_BAR_STYLE = open("demos/almost_dark_scrollbars.css", "r").read()
 
 def clone_and_update(base: Dict, **updates):
     result = base.copy()
@@ -328,6 +329,7 @@ def content(module_argument=None):
     result = div(
         responsive_margins(
             [
+                style(SCROLL_BAR_STYLE),
                 responsive_margins(main_title, lg=1, xxl=2),
                 responsive_margins(demo_apps_carousel, xs=2, md=0),
                 a(
@@ -423,9 +425,6 @@ def content(module_argument=None):
                 ),
             ]
         ),
-        # style={
-        #     "marginBottom": "5%",
-        # },
         style={
             "scrollBehavior": "smooth",
             "overflow": "auto",
