@@ -7,11 +7,11 @@ from reflect_utils.md_parsing import parse_md_doc
 from reflect_utils.common import make_editable
 
 MENU = [
-    ["Plotly stock chart", "demos/stocks_history/stocks_history"],
     [
         "Grid computing dashboard",
         'demos/dispatch/main#{ "archive": "demos/dispatch/replay.pick"}',
     ],
+    ["Plotly stock chart", "demos/stocks_history/stocks_history"],
     ["Crypto derivatives backtester", "demos/crypto_backtester/trading_view"],
     [
         "Yahoo Finance live quotes",
