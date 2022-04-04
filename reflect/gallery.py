@@ -22,8 +22,6 @@ MENU = [
     ["AG Grid example", "demos/stock_prices/main"],
     ["Generic dashboard", "demos/dashboard/dashboard"],
     ["Altair chart example", "demos/altair/car_data_set"],
-    # presentation should stay last not to show up in the main swiper
-    ["Spectacle presentation", "demos/presentation/presentation"],
 ]
 
 FILES_TO_ENTRIES = {file_path.split("#", 1)[0]: entry for entry, file_path in MENU}
