@@ -8,7 +8,7 @@ MENU = [
                 "Why Reflect?",
                 "context.md",
             ],
-            ["Who are we?", "information/team.md"],
+            # ["Who are we?", "information/team.md"],
             ["Become a Teky", "information/community.md"],
             ["Targeted users", "information/targeted_users.md"],
             # ["Investors", "information/investors.md"],
