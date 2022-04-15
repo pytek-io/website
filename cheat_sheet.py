@@ -1,3 +1,4 @@
+from tkinter import BROWSE
 from reflect_antd import Col, Row, Select, Checkbox
 from reflect_prism import PrismCodeFormatter
 from reflect_html import div
@@ -30,6 +31,11 @@ MODULE_NAMES = [
     "swiper",
     "utils",
 ]
+PLATFORMS = {
+    "MacOS": "mac",
+    "Windows": "win",
+    "Linux": "lin",
+}
 
 
 def create_row(content, template):
@@ -66,14 +72,15 @@ def app():
         reflect_versions, defaultValue=reflect_versions[0].value, style={"width": 80}
     )
     platforms = [
-        Option(human_name, value=platform)
-        for human_name, platform in [
-            ("Mac", "mac"),
-            ("Windows", "win"),
-            ("Linux", "lin"),
-        ]
+        Option(human_name, value=platform) for human_name, platform in PLATFORMS.items()
     ]
-    platform = Select(platforms, defaultValue=platforms[0].value, style={"width": 90})
+    browser_platform = get_window().browser_details["platform"]
+    print(browser_platform)
+    platform = Select(
+        platforms,
+        defaultValue=PLATFORMS.get(browser_platform, PLATFORMS["Linux"]),
+        style={"width": 90},
+    )
     create_python_environment = Checkbox(CREATE_PYTHON_ENV, defaultChecked=True)
     install_python_modules = Checkbox(INSTALL_PYTHON_MODULES, defaultChecked=True)
     launch_server = Checkbox(LAUNCH_SERVER, defaultChecked=True)
@@ -101,7 +108,10 @@ def app():
             )
             if create_python_environment():
                 commands.extend(
-                    ["cd reflect" + folder_seperator, f"virtualenv --python {python()} .venv"]
+                    [
+                        "cd reflect" + folder_seperator,
+                        f"virtualenv --python {python()} .venv",
+                    ]
                 )
             if install_python_modules():
                 commands.extend(
@@ -144,11 +154,11 @@ def app():
             style={
                 "position": "absolute",
                 "top": "-14px",
-                "margin-left": "16px",
+                "marginLeft": "16px",
                 "padding": "1px 8px",
                 "color": "#777",
                 "background": "#fff",
-                "border-radius": "2px 2px 0 0",
+                "borderRadius": "2px 2px 0 0",
                 "transition": "background-color 0.4s",
             },
         )
@@ -175,7 +185,7 @@ def app():
                     ],
                     style={"padding": "20px"},
                 ),
-                style={"border": "1px solid #f0f0f0", "margin-bottom": "20px"},
+                style={"border": "1px solid #f0f0f0", "marginBottom": "20px"},
             ),
             Row(
                 create_col(
