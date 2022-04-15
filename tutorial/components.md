@@ -16,7 +16,7 @@ tutorial.snippets.component_children
 tutorial.snippets.component_children
 ```
 
-As you can see, the `parent` div takes a list of children, whereas each child takes a single value. As a general rule, children must be passed as a list if there is more than one. You can also create dynamic content (i.e. children) by passing Python [callables](https://medium.com/swlh/callables-in-python-how-to-make-custom-instance-objects-callable-too-516d6eaf0c8d) instead of values. More on this [later](internal:website.reflect.tutorial/creating_inputs.md).
+As you can see, the `parent` div takes a list of children, whereas each child takes a single value. As a general rule, children must be passed as a list if there is more than one. You can also create dynamic content (i.e. children) by passing [Python callables](https://medium.com/swlh/callables-in-python-how-to-make-custom-instance-objects-callable-too-516d6eaf0c8d) instead of values. More on this [later](internal:website.reflect.tutorial/formulas.md).
 
 ### Component properties
 
@@ -24,7 +24,7 @@ Component properties are attributes that control the aspect and behaviour of UI 
 
 - literal values
 - components
-- Python [callables](https://medium.com/swlh/callables-in-python-how-to-make-custom-instance-objects-callable-too-516d6eaf0c8d)
+- Python callables
 
 #### Literal values
 
@@ -66,7 +66,7 @@ tutorial.snippets.component_property_as_callback
 tutorial.snippets.component_property_as_callback
 ```
 
-If you were daring enough to press the button above, you will see a popup message telling you not to do it again. You will also see a log of your naughtiness in the [browser console](https://updraftplus.com/faqs/how-do-i-open-my-browsers-developer-tools/) `Logs` tab, as all Python outputs are forwarded there. Note that callbacks can be [async](https://towardsdatascience.com/why-you-should-use-async-in-python-6ab53740077e) when needed. They can also receive data related to the event which triggered them (more on this [later](internal:website.reflect.tutorial/custom_callbacks.md)).
+If you were daring enough to press the button above, you will see a popup message telling you not to do it again. You will also see a log of your naughtiness in the [browser console](https://updraftplus.com/faqs/how-do-i-open-my-browsers-developer-tools/) `Logs` tab, as all Python outputs are forwarded there. Note that callbacks can be [async](https://towardsdatascience.com/why-you-should-use-async-in-python-6ab53740077e) when needed. They can also receive data related to the event which triggered them (more on this [later](internal:website.reflect.tutorial/custom_js_callbacks.md)).
 
 ### Summary
 
