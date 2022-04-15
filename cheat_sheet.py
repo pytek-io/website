@@ -1,3 +1,7 @@
+from ast import In
+from gettext import install
+
+from click import launch
 from reflect_antd import Col, Row, Select, Checkbox
 from reflect_prism import PrismCodeFormatter
 from reflect_html import div
@@ -6,7 +10,30 @@ from reflect_utils.md_parsing import parse_md_doc
 
 Option = Select.Option
 
-STEPS = ["setup", "install", "launch"]
+CREATE_PYTHON_ENV = "Create a Python environment"
+INSTALL_PYTHON_MODULES = "Install Reflect modules"
+LAUNCH_SERVER = "Launch Reflect server"
+
+STEPS = [
+    CREATE_PYTHON_ENV,
+    INSTALL_PYTHON_MODULES,
+    LAUNCH_SERVER,
+]
+MODULE_NAMES = [
+    "aggrid",
+    "altair",
+    "antd",
+    "ant_icons",
+    "bokeh",
+    "html",
+    "monaco",
+    "plotly",
+    "prism",
+    "rcdock",
+    "spectacle",
+    "swiper",
+    "utils",
+]
 
 
 def create_row(content, template):
@@ -51,61 +78,59 @@ def app():
         ]
     ]
     platform = Select(platforms, defaultValue=platforms[0].value, style={"width": 90})
-    steps = Checkbox.Group(options=STEPS, defaultValue=STEPS)
+    create_python_environment = Checkbox(CREATE_PYTHON_ENV, defaultChecked=True)
+    install_python_modules = Checkbox(INSTALL_PYTHON_MODULES, defaultChecked=True)
+    launch_server = Checkbox(LAUNCH_SERVER, defaultChecked=True)
 
     def content():
-        archive = f"reflect-{platform()}.{python()}-{reflect()}.tar.gz"
-        url = f"https://pytek.io/data/archives/{archive}"
+        archive = f"reflect-{platform()}.{python()}-{reflect()}"
+        url = f"https://pytek.io/data/archives/{archive}.tar.gz"
         is_win = platform() == "win"
-        explicit_list = lambda: f"packages/reflect-{reflect()}.tar.gz packages/reflect_aggrid-{reflect()}.tar.gz packages/reflect_altair-{reflect()}.tar.gz packages/reflect_antd-{reflect()}.tar.gz packages/reflect_ant_icons-{reflect()}.tar.gz packages/reflect_bokeh-{reflect()}.tar.gz packages/reflect_html-{reflect()}.tar.gz packages/reflect_monaco-{reflect()}.tar.gz packages/reflect_plotly-{reflect()}.tar.gz packages/reflect_prism-{reflect()}.tar.gz packages/reflect_rcdock-{reflect()}.tar.gz packages/reflect_spectacle-{reflect()}.tar.gz packages/reflect_swiper-{reflect()}.tar.gz packages/reflect_utils-{reflect()}.tar.gz"
+
+        def explicit_list():
+            reflect_value = reflect()
+            return " ".join(
+                [f"reflect-{reflect_value}.tar.gz"]
+                + [f"reflect_{name}-{reflect_value}.tar.gz" for name in MODULE_NAMES]
+            )
 
         def script():
-            lines = []
+            folder_seperator = "\\" if is_win else "/"
+            commands = ["mkdir reflect"]
             activated_environment = False
             activate_environment = (
                 ".\\.venv\\Scripts\\activate.ps1"
                 if is_win
                 else "source .venv/bin/activate"
             )
-            if "setup" in steps():
-                lines.append(f"virtualenv --python {python()} .venv")
-            if "install" in steps():
-                lines.extend(
+            if create_python_environment():
+                commands.extend(
+                    ["cd reflect" + folder_seperator, f"virtualenv --python {python()} .venv"]
+                )
+            if install_python_modules():
+                commands.extend(
                     [
                         f'Start-BitsTransfer -Source "{url}"'
                         if is_win
                         else f"wget --no-check-certificate {url}",
-                        f"tar xvf {archive}",
+                        f"tar xvf {archive}.tar.gz",
                         activate_environment,
-                        "pip install " + (explicit_list() if is_win else f"packages/*-{reflect()}.tar.gz"),
+                        f"cd {archive}{folder_seperator}packages",
+                        "pip install " + (explicit_list() if is_win else "*.tar.gz"),
+                        f"cd ..{folder_seperator}..",
                     ]
                 )
                 activated_environment = True
-            if "launch" in steps():
+            if launch_server():
                 if not activated_environment:
-                    lines.append(activate_environment)
-                lines.append(".\\reflect.exe" if is_win else "./reflect")
-            return "\n".join(line for line in lines if line is not None)
+                    commands.append(activate_environment)
+                commands.append(
+                    f".{folder_seperator}{archive}{folder_seperator}reflect"
+                    + (".exe" if is_win else "")
+                )
+            return "\n".join(line for line in commands if line is not None)
 
         return script
-
-    def create_setting_row(name, component):
-        return Row(
-            [
-                Col(
-                    label(name),
-                    className="ant-form-item-label",
-                    span=12,
-                ),
-                Col(
-                    component,
-                    className="ant-form-item-control-input-content",
-                ),
-            ],
-            justify="start",
-            align="middle",
-            style=dict(marginBottom=10),
-        )
 
     def create_link(extension=""):
         name = f"reflect-{platform()}.{python()}-{reflect()}.tar.gz{extension}"
@@ -114,19 +139,52 @@ def app():
     def label(content):
         return div(content, style={"textAlign": "right"})
 
-    def create_col(content):
-        return Col(
-            content,
-            xs=24,
-            xl=18,
+    def create_col(content, style=None):
+        return Col(content, xs=24, xl=18, style=style)
+
+    def create_box_title(title):
+        return div(
+            title,
+            style={
+                "position": "absolute",
+                "top": "-14px",
+                "margin-left": "16px",
+                "padding": "1px 8px",
+                "color": "#777",
+                "background": "#fff",
+                "border-radius": "2px 2px 0 0",
+                "transition": "background-color 0.4s",
+            },
         )
+
+    def is_xs_display():
+        return get_window().size() > WindowSize.xs
 
     return Col(
         [
             Row(
                 create_col(
                     [
-                        div(style={"height": 10}),
+                        create_box_title("Steps"),
+                        Row(
+                            Col(
+                                [
+                                    div(create_python_environment),
+                                    div(install_python_modules),
+                                    div(launch_server),
+                                ]
+                            ),
+                            justify="center",
+                        ),
+                    ],
+                    style={"padding": "20px"},
+                ),
+                style={"border": "1px solid #f0f0f0", "margin-bottom": "20px"},
+            ),
+            Row(
+                create_col(
+                    [
+                        create_box_title("Configuration"),
                         create_row(
                             [
                                 label("Platform"),
@@ -136,10 +194,12 @@ def app():
                                 label("Version"),
                                 reflect,
                             ],
-                            f"repeat({6 if get_window().size() > WindowSize.xs else 2}, 1fr)",
+                            f"repeat({6 if is_xs_display() else 2}, 1fr)",
                         ),
-                    ]
-                )
+                    ],
+                    style={"paddingTop": "20px", "paddingRight": "20px"},
+                ),
+                style={"border": "1px solid #f0f0f0"},
             ),
             Row(
                 PrismCodeFormatter(
@@ -148,13 +208,12 @@ def app():
                     lineNumbers=True,
                 ),
             ),
-            Row(create_col(Row(Col([steps]), justify="center"))),
             lambda: parse_md_doc(
-                f'''You can also download the archives manually using the following links.
+                f"""You can also use the links to download the relevant files and install Reflect as you see fit.
 * {create_link()}
 * {create_link(".sig")}
 
-Our public signature can be obtained by [mail](mailto:contact@pytek.io).'''
+Our public signature can be obtained by [mail](mailto:contact@pytek.io)."""
             ),
         ]
     )

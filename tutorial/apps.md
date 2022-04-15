@@ -1,12 +1,12 @@
 ### Basics
 
-Creating an app is as simple as defining a method called `app` which returns a UI component within a Python module. For example you can create a folder called `tests` within your working directory then create a file named `hello_world.py` inside, with the following content.
+Creating an app is as simple as defining a method called `app` which returns a UI component within a Python module. For example you can create a file named `hello_world.py` under your working directory, with the following content.
 
 ```read_module
 demos.hello_world
 ```
 
-You should find the same greeting as in the frame below at [localhost:8080/app/hello_world](http://localhost:8080/app/hello_world). Note that the `app` folder is virtual and corresponds by default to the folder from which you launched the Reflect server. It can be changed using the `app_folder` command line argument.
+You should find the same greeting as in the frame below at [localhost:8080/app/hello_world](http://localhost:8080/app/hello_world). Note that the `app` folder is virtual and corresponds by default to the folder from which you launched the Reflect server. It can be changed using the `--app-folder` command line argument.
 
 ```load_module
 demos.hello_world
