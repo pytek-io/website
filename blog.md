@@ -21,3 +21,16 @@ hello ![test](static/cogs.svg) world
 coming up with the right abstraction
 Making the right design choice
 Solving a lot technical problems the "right way"
+
+# Logical code structure
+    inside a file: reversed (a la c)
+    inside folders: stratified/distilled ()
+
+    Code (micro)structure
+
+
+
+In this series of posts I will share some simple tips on best programming practice. Nothing deep yet, but practical advice from my personal experience to improve efficiency. 
+
+Always (re)start from a hello world
+This is hardly relevant in Python in which this takes literally a single line. 
