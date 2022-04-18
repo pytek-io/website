@@ -1,4 +1,3 @@
-from tkinter import BROWSE
 from reflect_antd import Col, Row, Select, Checkbox
 from reflect_prism import PrismCodeFormatter
 from reflect_html import div
