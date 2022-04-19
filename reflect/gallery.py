@@ -21,7 +21,7 @@ MENU = [
     ["Todo list", "demos/todo_list/todo_list#demos/todo_list/default_todo_list.json"],
     ["AG Grid example", "demos/stock_prices/main"],
     ["Generic dashboard", "demos/dashboard/dashboard"],
-    ["App explorer", "demos/app_explorer/main"],
+    ["App explorer", "demos/app_explorer/main#demos"],
 ]
 
 FILES_TO_ENTRIES = {file_path.split("#", 1)[0]: entry for entry, file_path in MENU}
