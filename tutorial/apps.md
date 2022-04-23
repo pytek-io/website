@@ -20,6 +20,8 @@ We recommend you to store your app scripts inside dedicated subfolders. You can 
 website.folder_hierarchy
 ```
 
+> You can define your app method in a `__init__.py` module to shorten the path slightly. Renaming `main.py` in the previous example would allow us to launch the app at [localhost:8080/app/my_first_app](http://localhost:8080/app/my_first_app).
+
 ### Styling
 
 You can customize component look and feel by passing a `style` argument. Note that you need to use [React camelCased](https://reactjs.org/docs/dom-elements.html) attribute names and not the original html attribute names.
