@@ -3,7 +3,7 @@
 ![plotly_figure_factory](website/plotly_figure_factory.png)
 
 ```read_file
-demos.plotly_figure_factory
+demos.charts.plotly.figure_factory
 ```
 
 One can also use plotly_express as shown below.
@@ -11,7 +11,7 @@ One can also use plotly_express as shown below.
 ![plotly_express](website/plotly_express.png)
 
 ```read_file
-demos.plotly_express
+demos.charts.plotly.scatter_plotly_express
 ```
 
-You can see a more advanced use case in [Stock history](internal:website.reflect.gallery/demos.stocks_history.stocks_history).
+You can see a more advanced use case in [Stock history](internal:website.reflect.gallery/demos.stocks_history).

@@ -128,11 +128,13 @@ def join_lines(lines):
 
 def create_python_environment():
     python, _reflect, platform = components_cached()
+    is_win = platform() == "win"
     return join_lines(
         [
             "mkdir reflect",
-            "cd reflect" + folder_separator(platform() == "win"),
+            "cd reflect" + folder_separator(is_win),
             f"virtualenv --python {python()} .venv",
+            activate_environment(is_win)
         ]
     )
 

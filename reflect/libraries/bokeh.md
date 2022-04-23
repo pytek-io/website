@@ -3,7 +3,7 @@
 ![bokeh](website/bokeh.png)
 
 ```read_file
-demos.bokeh
+demos.charts.bokeh.buble.py
 ```
 
 You can also easily use [holoviews](https://holoviews.org) to easily generate advanced graphs as shown below.
@@ -11,5 +11,5 @@ You can also easily use [holoviews](https://holoviews.org) to easily generate ad
 ![Verhulst Mandelbrot](website/bokeh_mandelbrot.png)
 
 ```read_file
-demos.holoviews
+demos.charts.bokeh.verhulst_mandelbrot.py
 ```

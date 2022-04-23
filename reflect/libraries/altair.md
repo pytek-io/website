@@ -3,7 +3,7 @@
 ![altair](website/altair.png)
 
 ```read_file
-demos/altair/car_data_set.py
+demos.charts.altair.car_data_set.py
 ```
 
-You can find a simple example [here](internal:website.reflect.gallery/demos.altair.car_data_set).
+You can find a simple example [here](internal:website.reflect.gallery/demos.charts.altair.car_data_set).

@@ -9,19 +9,19 @@ from reflect_utils.common import make_editable
 MENU = [
     [
         "Grid computing dashboard",
-        'demos/dispatch/main#{ "archive": "demos/dispatch/replay.pick"}',
+        'demos.dispatch#{ "archive": "demos/dispatch/replay.pick"}',
     ],
-    ["Plotly stock chart", "demos/stocks_history/stocks_history"],
-    ["Crypto derivatives backtester", "demos/crypto_backtester/trading_view"],
+    ["Plotly stock chart", "demos.stocks_history"],
+    ["Crypto derivatives backtester", "demos.crypto_backtester"],
     [
         "Yahoo Finance live quotes",
-        'demos/yahoofinancelive/main#["CL=F", "^GSPC", "^FCHI", "^FTSE", "^FTMC", "^N225", "BTC-USD", "GC=F", "^HSI", "^DJI", "EURUSD=X", "GBPEUR=X"]',
+        'demos.yahoofinancelive#["CL=F", "^GSPC", "^FCHI", "^FTSE", "^FTMC", "^N225", "BTC-USD", "GC=F", "^HSI", "^DJI", "EURUSD=X", "GBPEUR=X"]',
     ],
-    ["Ant components explorer", "demos/ant/main"],
-    ["Todo list", "demos/todo_list/todo_list#demos/todo_list/default_todo_list.json"],
-    ["AG Grid example", "demos/stock_prices/main"],
-    ["Generic dashboard", "demos/dashboard/dashboard"],
-    ["App explorer", "demos/app_explorer/main#demos"],
+    ["Ant components explorer", "demos.ant"],
+    ["Todo list", "demos.todo_list#demos/todo_list/default_todo_list.json"],
+    ["AG Grid example", "demos.stock_prices"],
+    ["Generic dashboard", "demos.dashboard"],
+    ["App explorer", "demos.app_explorer#demos"],
 ]
 
 FILES_TO_ENTRIES = {file_path.split("#", 1)[0]: entry for entry, file_path in MENU}
@@ -33,16 +33,15 @@ def text(content, type="default"):
 
 def page_creator(file_path):
     actual_path = file_path.split("#")[0].replace(".", os.sep)
-    folder = actual_path.rsplit(os.sep, 1)[0]
-    md_file_path = actual_path + ".md"
+    md_file_path = os.path.join(actual_path, "description.md")
     return section(
         [
             Typography.Title(FILES_TO_ENTRIES[file_path.split("#", 1)[0]], level=3),
             make_editable(parse_md_doc(open(md_file_path, "r").read()), md_file_path),
             Row(
                 [
-                    Col(Image(width=200, src=os.path.join(folder, name)))
-                    for name in os.listdir(folder)
+                    Col(Image(width=200, src=os.path.join(actual_path, name)))
+                    for name in os.listdir(actual_path)
                     if name.endswith(".png")
                 ],
                 gutter=20,
@@ -69,7 +68,7 @@ def page_creator(file_path):
             Typography.Title("Source", level=3),
             PrismCodeFormatter(
                 language="python",
-                code=open(actual_path + ".py", "r").read(),
+                code=open(os.path.join(actual_path, "__init__.py"), "r").read(),
                 theme="github",
                 lineNumbers=True,
             ),
