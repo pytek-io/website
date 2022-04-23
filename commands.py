@@ -1,10 +1,25 @@
 from reflect_antd import Col, Row, Select
-from reflect_html import div, blockquote
+from reflect_html import div
+from reflect_prism import PrismCodeFormatter
 
 from reflect import WindowSize, get_window
 
 Option = Select.Option
-
+MODULE_NAMES = [
+    "aggrid",
+    "altair",
+    "antd",
+    "ant_icons",
+    "bokeh",
+    "html",
+    "monaco",
+    "plotly",
+    "prism",
+    "rcdock",
+    "spectacle",
+    "swiper",
+    "utils",
+]
 PLATFORMS = {
     "MacOS": "mac",
     "Windows": "win",
@@ -95,13 +110,81 @@ def create_box_title(title):
     )
 
 
+def activate_environment(is_win):
+    return ".\\.venv\\Scripts\\activate.ps1" if is_win else "source .venv/bin/activate"
+
+
+def folder_separator(is_win):
+    return "\\" if is_win else "/"
+
+
+def join_lines(lines):
+    return PrismCodeFormatter(
+        language="bash",
+        code="\n".join(line for line in lines if line is not None),
+        lineNumbers=True,
+    )
+
+
+def create_python_environment():
+    python, _reflect, platform = components_cached()
+    return join_lines(
+        [
+            "mkdir reflect",
+            "cd reflect" + folder_separator(platform() == "win"),
+            f"virtualenv --python {python()} .venv",
+        ]
+    )
+
+
+def install_reflect():
+    python, reflect, platform = components_cached()
+    archive = f"reflect-{platform()}.{python()}-{reflect()}"
+    url = f"https://pytek.io/data/archives/{archive}.tar.gz"
+    is_win = platform() == "win"
+
+    def explicit_list():
+        reflect_value = reflect()
+        return " ".join(
+            [f"reflect-{reflect_value}.tar.gz"]
+            + [f"reflect_{name}-{reflect_value}.tar.gz" for name in MODULE_NAMES]
+        )
+
+    return join_lines(
+        [
+            "cd reflect" + folder_separator(platform() == "win"),
+            activate_environment(is_win),
+            f'Start-BitsTransfer -Source "{url}"'
+            if is_win
+            else f"wget --no-check-certificate {url}",
+            f"tar xvf {archive}.tar.gz",
+            f"cd {archive}{folder_separator(is_win)}packages",
+            "pip install " + (explicit_list() if is_win else "*.tar.gz"),
+            f"cd ..{folder_separator(is_win)}..",
+        ]
+    )
+
+
+def launch_server():
+    python, reflect, platform = components_cached()
+    archive = f"reflect-{platform()}.{python()}-{reflect()}"
+    is_win = platform() == "win"
+    return join_lines(
+        [
+            "cd reflect" + folder_separator(is_win),
+            activate_environment(is_win),
+            f".{folder_separator(is_win)}{archive}{folder_separator(is_win)}reflect"
+            + (".exe" if is_win else ""),
+        ]
+    )
+
+
 def app():
     python, reflect, platform = components_cached()
     return Row(
         create_col(
             [
                 create_box_title("Configuration"),
-                blockquote("fs"),
                 create_row(
                     [
                         label("Platform"),

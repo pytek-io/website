@@ -55,9 +55,9 @@ Notice that we called `get_window` which returned a `Window` instance. This obje
 
 ## Summary
 
+- You can use any asyncio compatible libraries
 - Formulas can also be defined as async methods or generators.
 - Advanced functionalities are accessible through `get_window` which return a `Window` instance
-- You can use any asyncio/trio compatible libraries
 - Callbacks, `autorun` methods, `app` can be asynchronous
 - Apps can spawn asynchronous tasks running in the background
 - Automatic updates requires the web client to be running

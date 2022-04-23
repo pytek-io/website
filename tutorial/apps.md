@@ -12,6 +12,14 @@ You should find the same greeting as in the frame below at [localhost:8080/app/h
 demos.hello_world
 ```
 
+### Folder organization
+
+We recommend you to store your app scripts inside dedicated subfolders. You can launch them using `.` as folder separator. For example an app located as shown below would be accessible from [localhost:8080/app/my_first_app.main](http://localhost:8080/app/my_first_app.main)
+
+```read_file
+website.folder_hierarchy
+```
+
 ### Styling
 
 You can customize component look and feel by passing a `style` argument. Note that you need to use [React camelCased](https://reactjs.org/docs/dom-elements.html) attribute names and not the original html attribute names.
