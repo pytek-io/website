@@ -152,6 +152,7 @@ def install_reflect():
             [f"reflect-{reflect_value}.tar.gz"]
             + [f"reflect_{name}-{reflect_value}.tar.gz" for name in MODULE_NAMES]
         )
+
     return join_lines(
         [
             "cd reflect" + folder_separator(platform() == "win"),
@@ -160,10 +161,16 @@ def install_reflect():
             if is_win
             else f"curl {url} -o {archive_name}",
             f"tar xvf {archive_name}",
-            f"cd {archive}{folder_separator(is_win)}packages",
-            "pip install " + (explicit_list() if is_win else "*.tar.gz"),
-            f"cd ..{folder_separator(is_win)}..",
         ]
+        + (
+            [
+                f"cd {archive}{folder_separator(is_win)}packages",
+                "pip install " + (explicit_list() if is_win else "*.tar.gz"),
+                f"cd ..{folder_separator(is_win)}..",
+            ]
+            if is_win
+            else [f"pip install {archive}/packages/*.tar.gz"]
+        )
     )
 
 
