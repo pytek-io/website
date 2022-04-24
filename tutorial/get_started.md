@@ -35,6 +35,6 @@ website.launch_server
 
 ### Show me the code
 
-Those who prefer to dive straight into the code first (and read carefully the manually later on... ;-) can clone the code snippets from the [tutorial](https://github.com/pytek-io/tutorial) and [demos](https://github.com/pytek-io/tutorial) inside the working directory and browse them using [/app/demos/app_explorer/main#tutorial/snippets](http://localhost:8080/app/demos/app_explorer/main#tutorial/snippets).
+Those who prefer to dive straight into the code first (and read carefully the manually later on... ;-) can clone the code snippets from the [tutorial](https://github.com/pytek-io/tutorial) and [demos](https://github.com/pytek-io/tutorial) inside the working directory and browse them using [/app/demos.app_explorer#tutorial/snippets](http://localhost:8080/app/demos.app_explorer#tutorial/snippets).
 
 ![App explorer](/website/app_explorer.png)

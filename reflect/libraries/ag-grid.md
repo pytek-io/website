@@ -1,6 +1,6 @@
 [AG Grid](https://www.ag-grid.com/) is the arguably the most advanced JavaScript grid library. Its main API is composed of two classes: [AgGridColumn](https://www.ag-grid.com/react-data-grid/column-interface/), [AgGridReact](https://www.ag-grid.com/react-data-grid/grid-interface/). You can see a simple example below.
 
-```load_module
+```load_module_no_frame
 demos.ag-grid
 ```
 
