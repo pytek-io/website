@@ -1,3 +1,4 @@
+import os
 from reflect_antd import Col, Row, Select
 from reflect_html import div
 from reflect_prism import PrismCodeFormatter
@@ -33,13 +34,12 @@ def components():
         for version in reversed(list(range(7, 11)))
     ]
     reflect_versions = [
-        Option(f"0.{version}", value=f"0.{version}")
-        for version in reversed(list(range(1, 2)))
+        Option(version, value=version) for version in os.listdir("archives")
     ]
     python = Select(
         python_versions, defaultValue=python_versions[0].value, style={"width": 80}
     )
-    reflect = Select(
+    reflect_version = Select(
         reflect_versions, defaultValue=reflect_versions[0].value, style={"width": 80}
     )
     platforms = [
@@ -52,7 +52,7 @@ def components():
         ),
         style={"width": 90},
     )
-    return python, reflect, platform
+    return python, reflect_version, platform
 
 
 def components_cached():
@@ -134,32 +134,32 @@ def create_python_environment():
             "mkdir reflect",
             "cd reflect" + folder_separator(is_win),
             f"virtualenv --python {python()} .venv",
-            activate_environment(is_win)
+            activate_environment(is_win),
         ]
     )
 
 
 def install_reflect():
-    python, reflect, platform = components_cached()
-    archive = f"reflect-{platform()}.{python()}-{reflect()}"
-    url = f"https://pytek.io/data/archives/{archive}.tar.gz"
+    python, reflect_version, platform = components_cached()
+    archive = f"reflect-{platform()}.{python()}-{reflect_version()}"
+    archive_name = f"{archive}.tar.gz"
+    url = f"https://pytek.io/data/archives/{reflect_version()}/{archive_name}"
     is_win = platform() == "win"
 
     def explicit_list():
-        reflect_value = reflect()
+        reflect_value = reflect_version()
         return " ".join(
             [f"reflect-{reflect_value}.tar.gz"]
             + [f"reflect_{name}-{reflect_value}.tar.gz" for name in MODULE_NAMES]
         )
-
     return join_lines(
         [
             "cd reflect" + folder_separator(platform() == "win"),
             activate_environment(is_win),
             f'Start-BitsTransfer -Source "{url}"'
             if is_win
-            else f"wget --no-check-certificate {url}",
-            f"tar xvf {archive}.tar.gz",
+            else f"curl {url} -o {archive_name}",
+            f"tar xvf {archive_name}",
             f"cd {archive}{folder_separator(is_win)}packages",
             "pip install " + (explicit_list() if is_win else "*.tar.gz"),
             f"cd ..{folder_separator(is_win)}..",
@@ -168,8 +168,8 @@ def install_reflect():
 
 
 def launch_server():
-    python, reflect, platform = components_cached()
-    archive = f"reflect-{platform()}.{python()}-{reflect()}"
+    python, reflect_version, platform = components_cached()
+    archive = f"reflect-{platform()}.{python()}-{reflect_version()}"
     is_win = platform() == "win"
     return join_lines(
         [
@@ -182,7 +182,7 @@ def launch_server():
 
 
 def app():
-    python, reflect, platform = components_cached()
+    python, reflect_version, platform = components_cached()
     return Row(
         create_col(
             [
@@ -194,7 +194,7 @@ def app():
                         label("Python"),
                         python,
                         label("Version"),
-                        reflect,
+                        reflect_version,
                     ],
                     f"repeat({6 if is_xs_display() else 2}, 1fr)",
                 ),
