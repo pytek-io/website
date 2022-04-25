@@ -215,7 +215,7 @@ def content(module_argument=None):
                 [
                     img(
                         dataSrc=select_file_extension(
-                            path.join(path.split(app_path.split("#")[0])[0], "default")
+                            path.join(app_path.split("#")[0].replace(".", path.sep), "default")
                         ),
                         style={"width": "100%"},
                         className="swiper-lazy",
