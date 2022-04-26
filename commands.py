@@ -110,8 +110,27 @@ def create_box_title(title):
     )
 
 
-def activate_environment(is_win):
-    return ".\\.venv\\Scripts\\activate.ps1" if is_win else "source .venv/bin/activate"
+PADDING = 3
+
+
+def activate_environment(is_win, add_comment=True):
+    return (
+        ".\\.venv\\Scripts\\activate.ps1" if is_win else "source .venv/bin/activate"
+    ) + (
+        " " * PADDING + "# activating the virtual environment *if not already active*"
+        if add_comment
+        else ""
+    )
+
+
+def cd_to_working_directory(is_win):
+    activate_command = activate_environment(is_win)
+    cd_command = "cd reflect" + folder_separator(is_win)
+    return (
+        cd_command
+        + " " * (activate_command.index("#") - len(cd_command))
+        + "# moving to the working directory *if not already there*"
+    )
 
 
 def folder_separator(is_win):
@@ -131,10 +150,9 @@ def create_python_environment():
     is_win = platform() == "win"
     return join_lines(
         [
-            "mkdir reflect",
-            "cd reflect" + folder_separator(is_win),
+            "mkdir reflect" + folder_separator(is_win),
             f"virtualenv --python {python()} .venv",
-            activate_environment(is_win),
+            activate_environment(is_win, False),
         ]
     )
 
@@ -155,7 +173,7 @@ def install_reflect():
 
     return join_lines(
         [
-            "cd reflect" + folder_separator(platform() == "win"),
+            cd_to_working_directory(is_win),
             activate_environment(is_win),
             f'Start-BitsTransfer -Source "{url}"'
             if is_win
@@ -180,7 +198,7 @@ def launch_server():
     is_win = platform() == "win"
     return join_lines(
         [
-            "cd reflect" + folder_separator(is_win),
+            cd_to_working_directory(is_win),
             activate_environment(is_win),
             f".{folder_separator(is_win)}{archive}{folder_separator(is_win)}reflect"
             + (".exe" if is_win else ""),
