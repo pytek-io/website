@@ -26,6 +26,11 @@ PLATFORMS = {
     "Windows": "win",
     "Linux": "lin",
 }
+COMMENT_PADDING = 3
+
+
+def convert_version_to_number(version_as_string: str):
+    return tuple(int(element) for element in version_as_string.split("."))
 
 
 def components():
@@ -34,7 +39,10 @@ def components():
         for version in reversed(list(range(7, 11)))
     ]
     reflect_versions = [
-        Option(version, value=version) for version in os.listdir("archives")
+        Option(version, value=version)
+        for version in sorted(
+            os.listdir("archives"), key=convert_version_to_number, reverse=True
+        )
     ]
     python = Select(
         python_versions, defaultValue=python_versions[0].value, style={"width": 80}
@@ -110,25 +118,22 @@ def create_box_title(title):
     )
 
 
-PADDING = 3
-
-
 def activate_environment(is_win, add_comment=True):
     return (
         ".\\.venv\\Scripts\\activate.ps1" if is_win else "source .venv/bin/activate"
     ) + (
-        " " * PADDING + "# activating the virtual environment *if not already active*"
+        " " * COMMENT_PADDING
+        + "# activating the virtual environment *if not already active*"
         if add_comment
         else ""
     )
 
 
 def cd_to_working_directory(is_win):
-    activate_command = activate_environment(is_win)
     cd_command = "cd reflect" + folder_separator(is_win)
     return (
         cd_command
-        + " " * (activate_command.index("#") - len(cd_command))
+        + " " * (activate_environment(is_win).index("#") - len(cd_command))
         + "# moving to the working directory *if not already there*"
     )
 
