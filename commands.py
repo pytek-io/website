@@ -129,12 +129,12 @@ def activate_environment(is_win, add_comment=True):
     )
 
 
-def cd_to_working_directory(is_win):
+def cd_to_working_directory(is_win, add_comment=True):
     cd_command = "cd reflect" + folder_separator(is_win)
     return (
         cd_command
-        + " " * (activate_environment(is_win).index("#") - len(cd_command))
-        + "# moving to the working directory *if not already there*"
+        + (" " * (activate_environment(is_win).index("#") - len(cd_command))
+        + "# moving to the working directory *if not already there*" if add_comment else "")
     )
 
 
@@ -156,6 +156,7 @@ def create_python_environment():
     return join_lines(
         [
             "mkdir reflect" + folder_separator(is_win),
+            cd_to_working_directory(is_win, add_comment=False),
             f"virtualenv --python {python()} .venv",
             activate_environment(is_win, False),
         ]
