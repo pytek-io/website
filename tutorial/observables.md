@@ -30,6 +30,8 @@ In this example we wrapped `users` within an `ObservableList` called `user_obs`.
 Another interesting point is that `new_user_name` observable is passed to an input component that will update it. This is handy either for separating the business logic (aka the model) from the UI representation (aka the view) or for defining inter-dependant components.
 One last thing worth mentioning is the `key` arguments we passed to `make_observable`. These key values will be displayed in the `str` and `repr` methods to help debugging.
 
+
+
 ### Autorun
 
 So far we have seen that components automatically track updates to the observables they depend on. This allows for an elegant callback free API. However, we might sometimes want to have arbitrary side effects occurring on observable updates. Reflect supports this through the `autorun` method as featured below.

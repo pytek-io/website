@@ -45,8 +45,21 @@ tutorial.snippets.component_property_as_formula
 
 Note that callables are interpreted as either dynamic property values or [callbacks](http://localhost:8080/website.main#website.reflect.tutorial/creating_components.md), depending on the type of the property.
 
+### When formulas are not appropriate
+
+Formulas cover most needs and the recommended way to describe apps behaviours. Note that in the rare cases those are not suited one call always use the callback escape hatch. The example below demonstrate how to enforce consistency between two inputs.
+
+```load_module
+tutorial.snippets.input_callback
+```
+
+```read_module
+tutorial.snippets.input_callback
+```
+
 ### Summary
 
 - Input components are callable, returning their content when invoked
 - A formula is any Python callable which depends either directly or indirectly on input components
 - Content (i.e. children) and component properties can be passed as formulas to generate dynamic behaviour
+- Apps behaviour can be defined through explicit callbacks although those should be restricted to situations in which formulas are not suited

@@ -2,7 +2,7 @@ Reflect exposes to the [browser location hash](https://www.w3schools.com/jsref/p
 
 ### Reading the application hash argument
 
-You can pass a hash argument to an app by appending a string at the end of the path using the `#` character as separator. For example invoking the code below at `app/tutorial.snippets.hash#John` will yield the following.
+You can pass a hash argument to an app by appending a string at the end of the path using the `#` character as separator. For example invoking the code below at [localhost:8080/app/tutorial.snippets.hash#John](http://localhost:8080/app/tutorial.snippets.hash#John) will yield the following.
 
 ```read_module
 tutorial.snippets.hash#John
