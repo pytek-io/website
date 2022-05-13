@@ -157,7 +157,7 @@ def create_python_environment():
         [
             "mkdir reflect" + folder_separator(is_win),
             cd_to_working_directory(is_win, add_comment=False),
-            f"python3 -m venv --python {python()} .venv",
+            f"virtualenv --python {python()} .venv",
             activate_environment(is_win, False),
         ]
     )
