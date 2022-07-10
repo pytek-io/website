@@ -5,6 +5,23 @@ from reflect_prism import PrismCodeFormatter
 
 from reflect import WindowSize, get_window
 
+REFLECT_MODULES = [
+    "reflect",
+    "reflect_antd",
+    "reflect_utils",
+    "reflect_html",
+    "reflect_aggrid",
+    "reflect_plotly",
+    "reflect_altair",
+    "reflect_prism",
+    "reflect_ant_icons",
+    "reflect_rcdock",
+    "reflect_bokeh",
+    "reflect_spectacle",
+    "reflect_swiper",
+    "reflect_monaco",
+]
+
 Option = Select.Option
 MODULE_NAMES = [
     "aggrid",
@@ -29,7 +46,11 @@ PLATFORMS = {
 COMMENT_PADDING = 3
 
 
-def convert_version_to_number(version_as_string: str):
+def extract_version(wheel_name: str):
+    return wheel_name.split("-")[1]
+
+
+def convert_to_int_tuple(version_as_string: str):
     return tuple(int(element) for element in version_as_string.split("."))
 
 
@@ -41,7 +62,9 @@ def components():
     reflect_versions = [
         Option(version, value=version)
         for version in sorted(
-            os.listdir("archives"), key=convert_version_to_number, reverse=True
+            set(extract_version(element) for element in os.listdir("packages")),
+            key=convert_to_int_tuple,
+            reverse=True,
         )
     ]
     python = Select(
@@ -118,119 +141,20 @@ def create_box_title(title):
     )
 
 
-def activate_environment(is_win, add_comment=True):
-    return (
-        ".\\.venv\\Scripts\\activate.ps1" if is_win else "source .venv/bin/activate"
-    ) + (
-        " " * COMMENT_PADDING
-        + "# activating the virtual environment *if not already active*"
-        if add_comment
-        else ""
-    )
-
-
-def cd_to_working_directory(is_win, add_comment=True):
-    cd_command = "cd reflect" + folder_separator(is_win)
-    return (
-        cd_command
-        + (" " * (activate_environment(is_win).index("#") - len(cd_command))
-        + "# moving to the working directory *if not already there*" if add_comment else "")
-    )
-
-
-def folder_separator(is_win):
-    return "\\" if is_win else "/"
-
-
-def join_lines(lines):
+def display_commands(lines):
     return PrismCodeFormatter(
-        language="bash",
         code="\n".join(line for line in lines if line is not None),
-        lineNumbers=True,
-    )
-
-
-def create_python_environment():
-    python, _reflect, platform = components_cached()
-    is_win = platform() == "win"
-    return join_lines(
-        [
-            "mkdir reflect" + folder_separator(is_win),
-            cd_to_working_directory(is_win, add_comment=False),
-            f"virtualenv --python {python()} .venv",
-            activate_environment(is_win, False),
-        ]
     )
 
 
 def install_reflect():
-    python, reflect_version, platform = components_cached()
-    archive = f"reflect-{platform()}.{python()}-{reflect_version()}"
-    archive_name = f"{archive}.tar.gz"
-    url = f"https://pytek.io/data/archives/{reflect_version()}/{archive_name}"
-    is_win = platform() == "win"
-
-    def explicit_list():
-        reflect_value = reflect_version()
-        return " ".join(
-            [f"reflect-{reflect_value}.tar.gz"]
-            + [f"reflect_{name}-{reflect_value}.tar.gz" for name in MODULE_NAMES]
-        )
-
-    return join_lines(
+    modules_list = f" ".join(REFLECT_MODULES)
+    return display_commands(
         [
-            cd_to_working_directory(is_win),
-            activate_environment(is_win),
-            f'Start-BitsTransfer -Source "{url}"'
-            if is_win
-            else f"curl {url} -o {archive_name}",
-            f"tar xvf {archive_name}",
+            f"pip install --trusted-host pytek.io --index-url https://pytek.io/simple {modules_list}",
         ]
-        + (
-            [
-                f"cd {archive}{folder_separator(is_win)}packages",
-                "pip install " + (explicit_list() if is_win else "*.tar.gz"),
-                f"cd ..{folder_separator(is_win)}..",
-            ]
-            if is_win
-            else [f"pip install {archive}/packages/*.tar.gz"]
-        )
     )
 
 
 def launch_server():
-    python, reflect_version, platform = components_cached()
-    archive = f"reflect-{platform()}.{python()}-{reflect_version()}"
-    is_win = platform() == "win"
-    return join_lines(
-        [
-            cd_to_working_directory(is_win),
-            activate_environment(is_win),
-            f".{folder_separator(is_win)}{archive}{folder_separator(is_win)}reflect"
-            + (".exe" if is_win else ""),
-        ]
-    )
-
-
-def app():
-    python, reflect_version, platform = components_cached()
-    return Row(
-        create_col(
-            [
-                create_box_title("Configuration"),
-                create_row(
-                    [
-                        label("Platform"),
-                        platform,
-                        label("Python"),
-                        python,
-                        label("Version"),
-                        reflect_version,
-                    ],
-                    f"repeat({6 if is_xs_display() else 2}, 1fr)",
-                ),
-            ],
-            style={"paddingTop": "20px", "paddingRight": "20px"},
-        ),
-        style={"border": "1px solid #f0f0f0"},
-    )
+    return display_commands(["reflect"])

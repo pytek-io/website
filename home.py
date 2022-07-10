@@ -9,6 +9,7 @@ from reflect_html import a, div, img, svg, style, path as path_component
 from reflect_prism import PrismCodeFormatter
 from reflect_swiper import Swiper, SwiperSlide
 from reflect_utils.common import responsive_margins, load_module
+from reflect_utils.antd import centered
 
 from .reflect.gallery import MENU as GALLERY_MENU
 from .reflect.libraries import MENU as LIBRARY_MENU
@@ -189,14 +190,6 @@ def create_grid(rows):
             "display": "grid",
             "gridTemplateColumns": f"repeat({len(rows[0])}, 1fr)",
         },
-    )
-
-
-def centered(content):
-    return Row(
-        content,
-        justify="space-around",
-        align="middle",
     )
 
 
